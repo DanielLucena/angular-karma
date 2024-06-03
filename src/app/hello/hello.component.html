@@ -1,0 +1,8 @@
+
+  <h1>Olá {{ name }}!</h1>
+  <p>Você tem {{ numMsgs }}
+  {{ numMsgs === 1 ? 'mensagem' : 'mensagens' }}.
+  </p>
+  <button (click)="aumentar()" class="button is info">Aumentar mensagens</button>
+  <br/>
+  <button (click)="diminuir()" class="button is info">Diminuir mensagens</button>
