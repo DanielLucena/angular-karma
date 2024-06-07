@@ -8,9 +8,9 @@ describe('HelloComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HelloComponent ]
+      declarations: [HelloComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -25,14 +25,15 @@ describe('HelloComponent', () => {
 
   it('deve ter valores iniciais corretos', () => {
     expect(component.name).toBe('Fulano');
-    expect(component.numMsgs).toBe(0);
+    expect(component.numMsgs).toBe(1);
   });
 
   it('deve aumentar o número de mensagens quando aumentar() for chamado', () => {
+    const msgInicial = component.numMsgs;
     component.aumentar();
-    expect(component.numMsgs).toBe(1);
+    expect(component.numMsgs).toBe(msgInicial + 1);
     component.aumentar();
-    expect(component.numMsgs).toBe(2);
+    expect(component.numMsgs).toBe(msgInicial + 2);
   });
 
   it('deve diminuir o número de mensagens quando diminuir() for chamado', () => {
@@ -41,9 +42,14 @@ describe('HelloComponent', () => {
     expect(component.numMsgs).toBe(1);
     component.diminuir();
     expect(component.numMsgs).toBe(0);
+  });
+
+  it('deve parar de dimunir quando chegar em 0', () => {
+    component.diminuir();
+    expect(component.numMsgs).toBe(0);
     component.diminuir();
     expect(component.numMsgs).toBe(0); // Não deve diminuir abaixo de 0
-  });
+  })
 
   it('deve exibir corretamente a mensagem no template', () => {
     const compiled = fixture.nativeElement as HTMLElement;
@@ -62,10 +68,11 @@ describe('HelloComponent', () => {
   });
 
   it('deve aumentar mensagens quando o botão "Aumentar mensagens" for clicado', () => {
+    const msgInicial = component.numMsgs;
     const aumentarButton = fixture.debugElement.query(By.css('button:first-of-type'));
     aumentarButton.triggerEventHandler('click', null);
     fixture.detectChanges();
-    expect(component.numMsgs).toBe(1);
+    expect(component.numMsgs).toBe(msgInicial + 1);
   });
 
   it('deve diminuir mensagens quando o botão "Diminuir mensagens" for clicado', () => {
